@@ -1,0 +1,7 @@
+{
+  "slices": [
+    {"name": "general", "min_count": 3, "min_pass_rate": "0.666667"},
+    {"name": "adversarial-ambiguous", "min_count": 2, "min_pass_rate": "0.5"},
+    {"name": "unicode-地域", "min_count": 1, "min_pass_rate": "1"}
+  ]
+}
