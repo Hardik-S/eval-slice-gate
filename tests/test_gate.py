@@ -121,3 +121,16 @@ def test_console_pass_fail_invalid_and_noecho_paths(tmp_path):
 def test_help_uses_standard_argparse_output():
     result = subprocess.run([sys.executable, "-m", "eval_slice_gate.cli", "--help"], capture_output=True, text=True)
     assert result.returncode == 0 and "usage:" in result.stdout and result.stderr == ""
+
+
+def test_bundled_example_is_documented_gate_failure():
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[1]
+    result = subprocess.run([sys.executable, '-m', 'eval_slice_gate.cli',
+        str(root / 'examples/results.jsonl'), str(root / 'examples/policy.json')],
+        capture_output=True, text=True)
+    assert result.returncode == 1 and result.stderr == ''
+    report = json.loads(result.stdout)
+    assert report['status'] == 'fail'
+    assert report['slices'][0] == {'index': 0, 'count': 3, 'passed': 2,
+                                  'count_ok': True, 'rate_ok': False}

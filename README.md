@@ -13,7 +13,7 @@ python -m pip install ".[test]"
 eval-slice-gate examples/results.jsonl examples/policy.json
 ```
 
-The synthetic example exits `0` and prints one compact JSON report. Exit `1` means valid inputs failed a gate; exit `2` means invalid input or command misuse. `--help` prints standard usage.
+The synthetic example exits `1` and prints one compact JSON report: its first slice has 2 passes out of 3, which is below the exact decimal threshold `0.666667`. This intentionally demonstrates a valid gate failure. Exit `1` means valid inputs failed a gate; exit `2` means invalid input or command misuse. `--help` prints standard usage.
 
 ## Input contract
 
